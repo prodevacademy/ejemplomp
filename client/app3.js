@@ -1,9 +1,9 @@
 
-const mp3 = new MercadoPago('TEST-72b833a6-ef7b-469a-a035-9c3f00579bfd', {
+const mp3 = new MercadoPago('', {
     locale:"es-AR"
 });
 
-//80 usd a pesos argentinos son 76270
+
 
 document.getElementById("checkout-btn3").addEventListener("click", async ()=>{
 

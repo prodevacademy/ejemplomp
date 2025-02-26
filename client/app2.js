@@ -1,10 +1,10 @@
 
 
-const mp2 = new MercadoPago('TEST-72b833a6-ef7b-469a-a035-9c3f00579bfd', {
+const mp2 = new MercadoPago('', {
     locale:"es-AR"
 });
 
-//50 usd a pesos argentinos 47.600
+
 
 document.getElementById("checkout-btn2").addEventListener("click", async ()=>{
 
