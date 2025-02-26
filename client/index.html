@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+// SDK MercadoPago.js
+<script src="https://sdk.mercadopago.com/js/v2"></script>
+
+
+
+
+    <title>Hitpoly Membresía</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="./assets/favicon.ico" type="image/x-icon">
+    <style>
+        /* Fondo degradado con imagen opaca */
+        body {
+            background: linear-gradient(135deg, #2d1638, #211E26);
+            color: #ffffff;
+            position: relative;
+        }
+
+        body::before {
+            content: "";
+            position: absolute; /* Usa posición absoluta para que esté en el fondo */
+            top: 95%;
+            left: 0;
+            width: 100%; /* Asegura que la imagen cubra todo el ancho del contenedor */
+            height: 100%; /* Asegura que la imagen cubra todo el alto del contenedor */
+            background: url('./assets/fondo.png') no-repeat center center;
+            background-size: contain; /* Ajusta la imagen para que se ajuste dentro del área */
+            opacity: 0.3; /* Ajusta la opacidad para mayor visibilidad */
+            z-index: -1; /* Mantiene la imagen detrás del contenido */
+        }
+
+        /* Estilo de tarjeta con sombra */
+        .card {
+            background-color: #000000;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* Efecto hover para la tarjeta */
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Estilo del botón personalizado */
+        .btn-custom {
+            background-color: #6c4de2;
+            border-color: #6c4de2;
+            color: #ffffff;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        /* Efecto hover para el botón */
+        .btn-custom:hover {
+            background-color: #3b207f;
+            border-color: #3b207f;
+        }
+
+        /* Estilo específico para los títulos de las tarjetas */
+        .card-title-pro {
+            color: #6c4de2; /* Color para el título de la primera tarjeta */
+        }
+
+        .card-title-vip {
+            color: #F24B78; /* Color para el título de la segunda tarjeta */
+        }
+
+        .card-title-global {
+            color: #F2884B; /* Color para el título de la tercera tarjeta */
+        }
+
+        .logo-img {
+            width: 150px; /* Ajusta el tamaño del logo aquí */
+            height: auto; /* Mantiene la proporción del logo */
+        }
+
+        .display-4 {
+            color: #f211c6; /* Cambia el color del texto del título */
+            font-size: 2.5rem; /* Ajusta el tamaño del texto para que coincida con el tamaño del logo */
+        }
+
+        .d-flex {
+            display: flex;
+            align-items: center; /* Alinea verticalmente el logo y el título */
+            justify-content: center; /* Centra el contenido horizontalmente */
+        }
+
+        .ml-3 {
+            margin-left: 3rem; /* Espacio entre el logo y el título */
+        }
+
+        /* Media query para dispositivos móviles */
+        @media (max-width: 768px) {
+            /* Ocultar la imagen de fondo en dispositivos móviles */
+            body::before {
+                background: none;
+            }
+
+            /* Ocultar el título en dispositivos móviles */
+            .display-4 {
+                display: none;
+            }
+
+            /* Asegura que el logo esté centrado en dispositivos móviles */
+            .d-flex {
+                justify-content: center;
+            }
+
+            /* Ajusta las tarjetas para que ocupen todo el ancho de la pantalla */
+            .col-md-4 {
+                flex: 0 0 100%;
+                max-width: 100%;
+            }
+
+            /* Ajusta el espaciado entre tarjetas en dispositivos móviles */
+            .mb-4 {
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container my-5">
+        <!-- Logo y Título -->
+        <div class="text-center mb-4 d-flex align-items-center">
+            <img src="./assets/LOGO hitpoly 2.png" alt="Hitpoly Logo" class="logo-img">
+            <h1 class="display-4 ml-3">Planes de Membresía sistema Hitpoly</h1>
+        </div>
+        <!-- Tarjetas de Producto -->
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 text-center">
+                    <img src="./assets/suscripcionpro.png" class="card-img-top" alt="Suscripción Pro">
+                    <div class="card-body">
+                        <h3 class="name1 card-title-pro">SUSCRIPCIÓN PRO</h3> <!-- Color específico para la primera tarjeta -->
+                        <p class="card-text">20 PUNTOS | 20% NIVEL 1</p>
+                        <p class="price font-weight-bold">$20</p>
+                        <button class="btn btn-custom" id="checkout-btn">Comprar</button>
+                        <div id="wallet_container"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 text-center">
+                    <img src="./assets/suscripcionvip.png" class="card-img-top" alt="Suscripción VIP">
+                    <div class="card-body">
+                        <h3 class="name2 card-title-vip">SUSCRIPCIÓN DE INNOVACIÓN VIP</h3> <!-- Color específico para la segunda tarjeta -->
+                        <p class="card-text">50 PUNTOS | 25% NIVEL 2</p>
+                        <p class="price font-weight-bold">$50</p>
+                        <button class="btn btn-custom" id="checkout-btn2">Comprar</button>
+                        <div id="wallet_container2"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 text-center">
+                    <img src="./assets/suscripcionglobal.png" class="card-img-top" alt="Suscripción Global">
+                    <div class="card-body">
+                        <h3 class="name3 card-title-global">SUSCRIPCIÓN GLOBAL PREMIUM</h3> <!-- Color específico para la tercera tarjeta -->
+                        <p class="card-text">80 PUNTOS | 40% NIVEL 3</p>
+                        <p class="price font-weight-bold">$80</p>
+                        <button class="btn btn-custom" id="checkout-btn3">Comprar</button>
+                        <div id="wallet_container3"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS y dependencias -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="./app.js"></script>
+    <script src="./app2.js"></script>
+    <script src="./app3.js"></script>
+    
+</body>
+</html>
+
